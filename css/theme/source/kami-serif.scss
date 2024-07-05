@@ -1,0 +1,84 @@
+/**
+ * A simple theme for reveal.js presentations, similar
+ * to the default theme. The accent color is brown.
+ *
+ * This theme (serif.scss) is Copyright (C) 2012-2013 Owen Versteeg, http://owenversteeg.com - it is MIT licensed.
+ * 
+ * Additional changes by herrkami 2024: serif.scss -> kami-serif.scss
+ */
+
+
+// Default mixins and settings -----------------
+@import "../template/mixins";
+@import "../template/settings";
+// ---------------------------------------------
+
+
+
+// Override theme settings (see ../template/settings.scss)
+$mainFont: 'Palatino Linotype', 'Book Antiqua', Palatino, FreeSerif, serif;
+$mainFontSize: 18pt;
+$mainColor: #000;
+$headingFont: 'Palatino Linotype', 'Book Antiqua', Palatino, FreeSerif, serif;
+$headingColor: #383D3D;
+$headingTextShadow: none;
+$headingTextTransform: none;
+$backgroundColor: #ededed;
+$linkColor: #51483D;
+$linkColorHover: lighten( $linkColor, 20% );
+$selectionBackgroundColor: #26351C;
+
+$overlayElementBgColor: 0, 0, 0;
+$overlayElementFgColor: 240, 240, 240;
+
+// .reveal a {
+//   line-height: 1.0em;
+// }
+
+.reveal :is(h1, h2, h3, h4, h5, h6, p, blockquote) {
+  text-align: left;
+}
+
+.reveal :is(ul, ol, dl) {
+  display: block !important;
+}
+
+.reveal blockquote {
+  width: 100% !important;
+}
+
+.reveal pre {
+  width: 100% !important;
+}
+
+// Multi-column features
+.multiCol {
+    display: table;
+    table-layout: fixed; // don't fudge depending on content
+    width: 100%;
+    text-align: left;
+    .col {
+        display: table-cell;
+        vertical-align: top;
+        width: 50%;
+        padding: 2% 0 2% 3%; // some vertical, and between columns
+        &:first-of-type { padding-left: 0; } // there's nothing before col1
+    }
+}
+
+// Debug settings
+.reveal .slides {
+  background-color: var(--r-background-color);
+}
+.reveal-viewport {
+  background-color: #fff !important;
+}
+
+
+// Change text colors against dark slide backgrounds
+@include dark-bg-text-color(#fff);
+
+
+// Theme template ------------------------------
+@import "../template/theme";
+// ---------------------------------------------

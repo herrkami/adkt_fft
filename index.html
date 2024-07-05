@@ -1,54 +1,147 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/serif.css">
+  <title>reveal.js</title>
 
-		<!-- Theme used for syntax highlighted code -->
-		<!-- <link rel="stylesheet" href="plugin/highlight/zenburn.css"> -->
-		<!-- <link rel="stylesheet" href="plugin/highlight/grayscale.css"> -->
-		<!-- <link rel="stylesheet" href="plugin/highlight/ascetic.css"> -->
-		<link rel="stylesheet" href="plugin/highlight/black-metal.css">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section data-markdown>
-					<textarea data-template>
-						Slide 1
-						```python
-						def crazy_function(horses):
-							'''
-							This function is seriously crazy.
-							'''
-							return np.shuffle(horses)
-						```
-					</textarea>
-				</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+  <link rel="stylesheet" href="dist/reset.css">
+  <link rel="stylesheet" href="dist/reveal.css">
+  <link rel="stylesheet" href="dist/theme/kami-serif.css">
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
+  <!-- Theme used for syntax highlighted code (show case: https://highlightjs.org/demo) -->
+  <!-- <link rel="stylesheet" href="plugin/highlight/zenburn.css"> -->
+  <!-- <link rel="stylesheet" href="plugin/highlight/grayscale.css"> -->
+  <!-- <link rel="stylesheet" href="plugin/highlight/ascetic.css"> -->
+  <!-- <link rel="stylesheet" href="plugin/highlight/black-metal.css"> -->
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/loadcontent/plugin.js"></script> -->
+  
+  <style>
+    .slide-background-content {
+      background-image: url("../../../img/Fourier.jpg");
+      opacity: 0.5;
+      background-position: 50% 25%;
+      filter: blur(100px);
+    }
+  </style>
+
+
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- Intro -->
+      <include src="slides/intro.html"></include>
+      
+      <!-- Goals -->
+      <include src="slides/goals.html"></include>
+      
+      <!-- Motivation -->
+      <include src="slides/time_and_frequency.html"></include>
+      <include src="slides/space_and_frequency.html"></include>
+      <include src="slides/ft_in_nature_and_technology.html"></include>
+      
+      <!-- Algorithms -->
+      <include src="slides/algorithms.html"></include>
+      <include src="slides/pre_and_postprocessing.html"></include>
+      
+      <!-- Goodies -->
+      <include src="slides/goodies.html"></include>
+      
+      <!-- Recap -->
+      <include src="slides/recap.html"></include> 
+      
+      <!-- <section data-markdown="md/01_intro/personal_intro.md"></section>
+      <section data-markdown="md/01_intro/lecture_goals.md"></section>
+
+      <section data-markdown="md/02_motivation/time_and_frequency.md"></section>
+      <section data-markdown="md/02_motivation/examples.md"></section>
+      <section data-markdown="md/02_motivation/space_and_frequency.md"></section>
+      <section data-markdown="md/02_motivation/ft_in_nature_time.md"></section>
+      <section data-markdown="md/02_motivation/ft_in_nature_space.md"></section>
+      <section data-markdown="md/02_motivation/ft_in_technology.md"></section>
+
+      <section data-markdown="md/03_algorithms/vanilla_dft.md"></section>
+      <section data-markdown="md/03_algorithms/cooley-tuckey.md"></section>
+      <section data-markdown="md/03_algorithms/overview.md"></section>
+
+      <section data-markdown="md/04_beyond/infinite_signals.md"></section>
+      <section data-markdown="md/04_beyond/window_functions.md"></section>
+      <section data-markdown="md/04_beyond/sampling_aliasing.md"></section>
+
+      <section data-markdown="md/05_goodies/information_and_uncertainty.md"></section>
+      <section data-markdown="md/05_goodies/wiener_khinchin.md"></section>
+
+      <section data-markdown="md/06_outro/recap.md"></section> -->
+
+    </div>
+  </div>
+
+  <script src="dist/reveal.js"></script>
+  <script src="plugin/notes/notes.js"></script>
+  <script src="plugin/markdown/markdown.js"></script>
+  <script src="plugin/highlight/highlight.js"></script>
+  <script src="plugin/math/math.js"></script>
+  <script>
+
+    // The following allows html files to be embedded
+    function loadIncludes() {
+      return Promise.all(
+        [...document.querySelectorAll("include")].map((include) => {
+          return fetch(include.getAttribute("src"))
+            .then((response) => response.text())
+            .then((html) => (include.outerHTML = html))
+            .catch(console.err);
+        })
+      );
+    }
+    loadIncludes().then(() => {
+      Reveal.initialize({
+        hash: true,
+        
+        center:false,
+
+        slideNumber: true,
+        
+        plugins: [
+          RevealMarkdown, 
+          RevealHighlight, 
+          RevealNotes,
+          RevealMath.KaTeX,
+          // RevealLoadContent,
+        ],
+      });
+    });
+
+    // Custom style changers
+    Reveal.on('unblur-bg', () => {
+      for ( const bg of document.getElementsByClassName("slide-background-content") ){
+        bg.style.transition = 'all 1000ms ease';
+        bg.style.filter = 'none';
+      };
+    });
+
+    Reveal.on('blur-bg', () => {
+      for ( const bg of document.getElementsByClassName("slide-background-content") ){
+        bg.style.transition = 'all 1000ms ease';
+        bg.style.filter = 'blur(100px)';
+      };
+    });
+
+    // Reveal.initialize({
+    //   hash: true,
+    //   plugins: [
+    //     RevealMarkdown,
+    //     RevealHighlight,
+    //     RevealNotes,
+    //   ],
+    // });
+  </script>
+</body>
+
 </html>
