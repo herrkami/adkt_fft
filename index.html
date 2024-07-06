@@ -18,6 +18,8 @@
   <!-- <link rel="stylesheet" href="plugin/highlight/black-metal.css"> -->
 
   <!-- <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/loadcontent/plugin.js"></script> -->
+  <script src="plugin/chart/chart.min.js"></script>
+  <script src="plugin/chart/plugin.js"></script>
   
   <style>
     .slide-background-content {
@@ -56,29 +58,6 @@
       <!-- Recap -->
       <include src="slides/recap.html"></include> 
       
-      <!-- <section data-markdown="md/01_intro/personal_intro.md"></section>
-      <section data-markdown="md/01_intro/lecture_goals.md"></section>
-
-      <section data-markdown="md/02_motivation/time_and_frequency.md"></section>
-      <section data-markdown="md/02_motivation/examples.md"></section>
-      <section data-markdown="md/02_motivation/space_and_frequency.md"></section>
-      <section data-markdown="md/02_motivation/ft_in_nature_time.md"></section>
-      <section data-markdown="md/02_motivation/ft_in_nature_space.md"></section>
-      <section data-markdown="md/02_motivation/ft_in_technology.md"></section>
-
-      <section data-markdown="md/03_algorithms/vanilla_dft.md"></section>
-      <section data-markdown="md/03_algorithms/cooley-tuckey.md"></section>
-      <section data-markdown="md/03_algorithms/overview.md"></section>
-
-      <section data-markdown="md/04_beyond/infinite_signals.md"></section>
-      <section data-markdown="md/04_beyond/window_functions.md"></section>
-      <section data-markdown="md/04_beyond/sampling_aliasing.md"></section>
-
-      <section data-markdown="md/05_goodies/information_and_uncertainty.md"></section>
-      <section data-markdown="md/05_goodies/wiener_khinchin.md"></section>
-
-      <section data-markdown="md/06_outro/recap.md"></section> -->
-
     </div>
   </div>
 
@@ -88,6 +67,43 @@
   <script src="plugin/highlight/highlight.js"></script>
   <script src="plugin/math/math.js"></script>
   <script>
+    function parseJSON(str) {
+	    var json;
+	    try {
+        json = JSON.parse(str);
+	    } catch (e) {
+        return null;
+      }
+        return json;
+    }
+
+
+    // Math
+    // Scales and constants
+    const n_default = 256;
+    var x_0_to_2pi = [ ...Array(n_default).keys() ].map((i) => i*2*Math.PI/n_default);
+    var x_0_to_8pi = [ ...Array(n_default).keys() ].map((i) => i*8*Math.PI/n_default);
+    // Helper functions
+    const formatLabelRadian = (x) => {
+      let n_pi_halves = parseInt(Math.round(x / ( Math.PI / 2 )));
+      // 1/2 -> 1/2
+      // ...
+      if (n_pi_halves === 0) return '0';
+      if ( (n_pi_halves + 1) % 2) {
+        // 2/2 -> 1
+        return (x / Math.PI ).toFixed(0) + ' π';
+      } else {
+        // return n_pi_halves + '/2 π';
+        if ( parseInt(n_pi_halves/2) === 0 ) {
+          return '½ π';
+        } else {
+          return parseInt(n_pi_halves/2) + '½ π';
+        }
+      }
+
+      const label = ( + 1) % 2;
+      return label;
+    }
 
     // The following allows html files to be embedded
     function loadIncludes() {
@@ -101,18 +117,78 @@
       );
     }
     loadIncludes().then(() => {
+
       Reveal.initialize({
+        // width: 960,
+        // height: 700,
+        width: 2000,
+        height: 900,
+
+        // minScale: 1,
+        // maxScale: 1,
+
+        margin: 0.04,
+
         hash: true,
 
         center:false,
 
         slideNumber: true,
+
+        chart: {
+          defaults: {
+            color: '#383D3D', // color of labels
+            font: {
+              size: 20,
+            },
+            scale: {
+              beginAtZero: true,
+              ticks: { 
+                // maxTicksLimit: 10,
+                // autoSkip: false
+                // count: 5, 
+              },
+              grid: { color: "#383D3D33" } , // color of grid lines
+            },
+            plugins: {
+              legend: {
+                display: false
+              },
+            },
+          },
+          line: { 
+            borderColor: [ 
+              "#383D3D", 
+              "#383D3D", 
+              "#383D3D", 
+            ],
+            // "borderDash": [ [5,10], [0,0] ] 
+          },
+          bar: { 
+            backgroundColor: [ 
+              "rgba(20,220,220,.8)", 
+              "rgba(220,120,120,.8)", 
+              "rgba(20,120,220,.8)" 
+            ]
+          },
+          pie: { 
+            backgroundColor: [[
+              "rgba(0,0,0,.8)",
+              "rgba(220,20,20,.8)",
+              "rgba(20,220,20,.8)",
+              "rgba(220,220,20,.8)",
+              "rgba(20,20,220,.8)"
+            ]]
+          },
+        },
         
         plugins: [
           RevealMarkdown, 
           RevealHighlight, 
           RevealNotes,
           RevealMath.KaTeX,
+
+          RevealChart,
           // RevealLoadContent,
         ],
       });
@@ -132,6 +208,8 @@
         bg.style.filter = 'blur(100px)';
       };
     });
+
+    
 
     // Reveal.initialize({
     //   hash: true,

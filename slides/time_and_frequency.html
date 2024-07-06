@@ -1,11 +1,64 @@
 <section data-markdown>
-    Beispiele:
-        - Sinus → Delta
-        - Exponentialfunktion → Exponentialfunktion
-        - Delta → constant
-    - FT in der Natur (zeitliche Signale)
-        - Prisma
-        - Dispersion
-        - Cochlea
-        - Neocortex
+  Beispiele:
+  - Sinus → Delta
+  - Exponentialfunktion → Exponentialfunktion
+  - Delta → constant
+  - FT in der Natur (zeitliche Signale)
+  - Prisma
+  - Dispersion
+  - Cochlea
+  - Neocortex
+</section>
+
+<section>
+  <h2>Plot</h2>
+  <div class="r-stretch">
+    <canvas data-chart="line">
+      <!--
+      {
+        "data": {
+          "labels": "(() => {return x_0_to_8pi;})()",
+          "datasets":[
+            {
+              "data": "(() => {return x_0_to_8pi.flatMap((x) => Math.sin(x));})()",
+              // "label":"My first dataset","backgroundColor":"#383D3D",
+              "pointRadius": "0"
+            }
+          ]
+        },
+        "options": {
+          "scales": {
+            "x": {
+              "type": "linear",
+              "ticks": {
+                "min": 0,
+                "autoSkip": true,
+                "stepSize": "(() => {return Math.PI/2})()",
+                "callback": "(() => {return (val) => {return formatLabelRadian(val)}} )()"
+              }
+            }
+          }
+        }
+      }
+      -->
+    </canvas>
+  </div>
+</section>
+<!-- // "afterBuildTicks": "(() => {return (axis, ticks) => [0, 3.5, 5.7, 6.1].map(v => ({ "value": v }))})()" -->
+
+<section>
+  <div class="r-stretch">
+    <canvas data-chart="line">
+      My first dataset, 65, 59, 80, 81, 56, 55, 40
+      My second dataset, 28, 48, 40, 19, 86, 27, 90
+      <!--
+      {
+        "data" : {
+          "labels" : ["Enero", "Febrero", "Marzo", "Avril", "Mayo", "Junio", "Julio"],
+          "datasets" : [{ "borderColor": "#0f0", "borderDash": ["5","10"] }, { "borderColor": "#0ff" } ]
+          }
+      }
+      -->
+    </canvas>
+  </div>
 </section>
