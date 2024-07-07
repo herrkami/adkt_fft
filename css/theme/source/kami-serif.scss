@@ -34,6 +34,9 @@ $overlayElementFgColor: 240, 240, 240;
 // .reveal a {
 //   line-height: 1.0em;
 // }
+.reveal .katex {
+  font-size: 110%;
+}
 
 .reveal :is(h1, h2, h3, h4, h5, h6, p, blockquote) {
   text-align: left;

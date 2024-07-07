@@ -1,0 +1,79 @@
+<section>
+    <h3>
+      Deltaimpuls: \(\delta(n - n_{0}) \rightarrow\) 
+      <span class="fragment" data-fragment-index="1">\(e^{2\pi i\frac{n_{0}}{N}k}\)</span>
+    </h3>
+    <div style="height: 300px">
+      <canvas data-chart="line">
+        <!--
+        {
+          "data": {
+            "labels": "(() => {return x_0_to_n;})()",
+            "datasets":[
+              {
+                "data": "(() => {return delta_peak_noisy;})()",
+                "pointRadius": "0"
+              }
+            ]
+          },
+          "options": {
+            "scales": {
+              "x": {
+                "type": "linear",
+                "ticks": {
+                  "min": "0",
+                  "max": "(() => {return n_default})()",
+                  "autoSkip": true,
+                  "stepSize": "(() => {return n_default/16})()",
+                  "callback": "(() => {return (val) => {return val.toFixed(0)}} )()"
+                }
+              },
+              "y": {
+                "display": false
+              }
+            }
+          }
+        }
+        -->
+      </canvas>
+    </div>
+    <div style="height: 300px;" class="fragment" data-fragment-index="1">
+      <canvas data-chart="line">
+        <!--
+          {
+            "data": {
+              "labels": "(() => {return x_0_to_n;})()",
+              "datasets":[
+                {
+                  "data": "(() => {return getAmplitudes(delta_peak_noisy);})()",
+                  "pointRadius": "0"
+                }
+              ]
+            },
+            "options": {
+              "scales": {
+                "x": {
+                  "type": "logarithmic",
+                  "bounds": "data",
+                  "min": "0.1",
+                  "max": "(() => {return n_default/2})()",
+                  "ticks": {
+                    "maxTicksLimit": 16,
+                    "callback": "(() => {return (val) => {return val}} )()"
+                  }
+                },
+                "y": {
+                  "type": "logarithmic",
+                  "ticks": {
+                    "maxTicksLimit": 8,
+                    // "callback": "(() => {return (val) => {return '10^' + Math.log10(val)}} )()"
+                    "callback": "(() => {return (val) => {return ''}} )()"
+                  }
+                }
+              }
+            }
+          }
+          -->
+      </canvas>
+    </div>
+  </section>

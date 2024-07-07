@@ -20,7 +20,7 @@
   <!-- <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/loadcontent/plugin.js"></script> -->
   <script src="plugin/chart/chart.min.js"></script>
   <script src="plugin/chart/plugin.js"></script>
-  
+
   <style>
     .slide-background-content {
       background-image: url("dist/img/Fourier.jpg");
@@ -39,25 +39,37 @@
 
       <!-- Intro -->
       <include src="slides/intro.html"></include>
-      
+
       <!-- Goals -->
       <include src="slides/goals.html"></include>
-      
+
       <!-- Motivation -->
-      <include src="slides/time_and_frequency.html"></include>
+      <!-- Time and frequency -->
+      <section>
+        <include src="slides/tnf/time_and_frequency.html"></include>
+        <include src="slides/tnf/tnf_amplitudes_and_frequencies.html"></include>
+        <include src="slides/tnf/tnf_sin_delta.html"></include>
+        <include src="slides/tnf/tnf_delta0.html"></include>
+        <include src="slides/tnf/tnf_pulse.html"></include>
+        <include src="slides/tnf/tnf_gauss.html"></include>
+      </section>
+
+      <!-- Space and frequency -->
       <include src="slides/space_and_frequency.html"></include>
+
+      <!-- FT in nature and technology -->
       <include src="slides/ft_in_nature_and_technology.html"></include>
-      
+
       <!-- Algorithms -->
       <include src="slides/algorithms.html"></include>
       <include src="slides/pre_and_postprocessing.html"></include>
-      
+
       <!-- Goodies -->
       <include src="slides/goodies.html"></include>
-      
+
       <!-- Recap -->
-      <include src="slides/recap.html"></include> 
-      
+      <include src="slides/recap.html"></include>
+
     </div>
   </div>
 
@@ -66,43 +78,19 @@
   <script src="plugin/markdown/markdown.js"></script>
   <script src="plugin/highlight/highlight.js"></script>
   <script src="plugin/math/math.js"></script>
+
+  <script src="js/custom/fft.js"></script>
+  <script src="js/custom/math.js"></script>
+
   <script>
     function parseJSON(str) {
-	    var json;
-	    try {
+      var json;
+      try {
         json = JSON.parse(str);
-	    } catch (e) {
+      } catch (e) {
         return null;
       }
-        return json;
-    }
-
-
-    // Math
-    // Scales and constants
-    const n_default = 256;
-    var x_0_to_2pi = [ ...Array(n_default).keys() ].map((i) => i*2*Math.PI/n_default);
-    var x_0_to_8pi = [ ...Array(n_default).keys() ].map((i) => i*8*Math.PI/n_default);
-    // Helper functions
-    const formatLabelRadian = (x) => {
-      let n_pi_halves = parseInt(Math.round(x / ( Math.PI / 2 )));
-      // 1/2 -> 1/2
-      // ...
-      if (n_pi_halves === 0) return '0';
-      if ( (n_pi_halves + 1) % 2) {
-        // 2/2 -> 1
-        return (x / Math.PI ).toFixed(0) + ' π';
-      } else {
-        // return n_pi_halves + '/2 π';
-        if ( parseInt(n_pi_halves/2) === 0 ) {
-          return '½ π';
-        } else {
-          return parseInt(n_pi_halves/2) + '½ π';
-        }
-      }
-
-      const label = ( + 1) % 2;
-      return label;
+      return json;
     }
 
     // The following allows html files to be embedded
@@ -131,7 +119,7 @@
 
         hash: true,
 
-        center:false,
+        center: false,
 
         slideNumber: true,
 
@@ -143,35 +131,66 @@
             },
             scale: {
               beginAtZero: true,
-              ticks: { 
-                // maxTicksLimit: 10,
-                // autoSkip: false
+              ticks: {
+                // maxTicksLimit: 8,
+                // autoSkip: true
                 // count: 5, 
               },
-              grid: { color: "#383D3D33" } , // color of grid lines
+              grid: { color: "#383D3D33" }, // color of grid lines
+              afterFit(scale) { scale.width = 90 },
+            },
+            interaction: {
+              intersect: false,
+              mode: 'nearest',
             },
             plugins: {
               legend: {
                 display: false
               },
+              tooltip: {
+                callbacks: {
+                  title: function (ctx) {
+                    let x = ctx[0].parsed.x;
+                    if ( x != null ) {
+                      if ( ctx[0].chart.scales.x.type === "logarithmic") {
+                        x = 'f: ' + x.toFixed(0);
+                      } else {
+                        x = 't: ' + x.toFixed(0);
+                      }
+                      return x;
+                    }
+                  },
+                  label: (ctx) => {
+                    let y = ctx.parsed.y;
+                    if ( y != null ) {
+                      if ( ctx.chart.scales.y.type === "logarithmic") {
+                        y = 'X: ' + y.toExponential(2).replace(/e\+?/, ' x 10^');
+                      } else {
+                        y = 'x: ' + y.toFixed(2);
+                      }
+                      return y;
+                    }
+                  },
+                },
+              },
             },
           },
-          line: { 
-            borderColor: [ 
-              "#383D3D", 
-              "#383D3D", 
-              "#383D3D", 
+          line: {
+            borderColor: [
+              "#383D3D",
+              "#383D3D",
+              "#383D3D",
             ],
             // "borderDash": [ [5,10], [0,0] ] 
           },
-          bar: { 
-            backgroundColor: [ 
-              "rgba(20,220,220,.8)", 
-              "rgba(220,120,120,.8)", 
-              "rgba(20,120,220,.8)" 
+          bar: {
+            backgroundColor: [
+              "rgba(20,220,220,.8)",
+              "rgba(220,120,120,.8)",
+              "rgba(20,120,220,.8)"
             ]
           },
-          pie: { 
+          pie: {
             backgroundColor: [[
               "rgba(0,0,0,.8)",
               "rgba(220,20,20,.8)",
@@ -181,10 +200,24 @@
             ]]
           },
         },
-        
+
+        katex: {
+          version: 'latest',
+          strict: false,
+          trust: true,
+          "font-size": "5px",
+          delimiters: [
+            { left: '$$', right: '$$', displayMode: true },
+            { left: '$', right: '$', displayMode: false },
+            { left: '\\(', right: '\\)', displayMode: false },
+            { left: '\\[', right: '\\]', displayMode: true },
+          ],
+          ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        },
+
         plugins: [
-          RevealMarkdown, 
-          RevealHighlight, 
+          RevealMarkdown,
+          RevealHighlight,
           RevealNotes,
           RevealMath.KaTeX,
 
@@ -196,20 +229,20 @@
 
     // Custom style changers
     Reveal.on('unblur-bg', () => {
-      for ( const bg of document.getElementsByClassName("slide-background-content") ){
+      for (const bg of document.getElementsByClassName("slide-background-content")) {
         bg.style.transition = 'all 1000ms ease';
         bg.style.filter = 'none';
       };
     });
 
     Reveal.on('blur-bg', () => {
-      for ( const bg of document.getElementsByClassName("slide-background-content") ){
+      for (const bg of document.getElementsByClassName("slide-background-content")) {
         bg.style.transition = 'all 1000ms ease';
         bg.style.filter = 'blur(100px)';
       };
     });
 
-    
+
 
     // Reveal.initialize({
     //   hash: true,

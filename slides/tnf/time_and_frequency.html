@@ -1,0 +1,104 @@
+<section class="center">
+  <p class="r-fit-text">Zeit und Frequenz</p>
+</section>
+
+<section data-markdown>
+  Beispiele:
+  - Sinus → Delta
+  - Exponentialfunktion → Exponentialfunktion
+  - Delta → constant
+  - FT in der Natur (zeitliche Signale)
+  - Prisma
+  - Dispersion
+  - Cochlea
+  - Neocortex
+</section>
+
+<section class="center">
+  <p class="r-fit-text">Definitionen und Beispiele</p>
+</section>
+
+<section>
+  <h3>
+    Spektrale Leistungsdichte: \(\mathcal{P}(x) = |X_{k}|^{2}\)
+  </h3>
+  <div style="height: 300px">
+    <canvas data-chart="line">
+      <!--
+      {
+        "data": {
+          "labels": "(() => {return x_0_to_n;})()",
+          "datasets":[
+            {
+              "data": "(() => {return sin_32_noisy;})()",
+              "pointRadius": "0"
+            }
+          ]
+        },
+        "options": {
+          "scales": {
+            "x": {
+              "type": "linear",
+              "ticks": {
+                "min": 0,
+                "max": "(() => {return n_default})()",
+                "autoSkip": true,
+                "stepSize": "(() => {return n_default/16})()",
+                "callback": "(() => {return (val) => {return val.toFixed(0)}} )()"
+              }
+            },
+            "y": {
+              "type": "linear",
+              "min": -1,
+              "max": 1,
+              "ticks": {
+                "autoSkip": true,
+                "stepSize": "(() => {return 0.5})()",
+                "callback": "(() => {return (val) => {return val.toFixed(1)}} )()"
+              }
+            }
+          }
+        }
+      }
+      -->
+    </canvas>
+  </div>
+
+  <div style="height: 300px;">
+    <canvas data-chart="line">
+      <!--
+      {
+        "data": {
+          "labels": "(() => {return x_0_to_n;})()",
+          "datasets":[
+            {
+              "data": "(() => {return getPowerSpectrum(sin_32_noisy);})()",
+              "pointRadius": "0"
+            }
+          ]
+        },
+        "options": {
+          "scales": {
+            "x": {
+              "type": "logarithmic",
+              "min": "0.1",
+              "max": "(() => {return n_default})()",
+              "ticks": {
+                "maxTicksLimit": 16,
+                "callback": "(() => {return (val) => {return val}} )()"
+              }
+            },
+            "y": {
+              "type": "logarithmic",
+              "ticks": {
+                "maxTicksLimit": 4,
+                "callback": "(() => {return (val) => {return '10^' + Math.log10(val)}} )()"
+              }
+            }
+          }
+        }
+      }
+      -->
+    </canvas>
+  </div>
+</section>

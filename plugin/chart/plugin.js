@@ -70,7 +70,7 @@ const initChart = function (Reveal) {
 					// console.log(data[k]);
 					// data[k] = eval(data[k]).toString();
 					data[k] = eval(data[k]);
-					console.log(data[k]);
+					// console.log(data[k]);
 				}
 			}
 		}
@@ -89,7 +89,7 @@ const initChart = function (Reveal) {
 			
 			// Replace comments within the comment section :)
 			comments[j] = comments[j].replace(comments[j].match(/\/\/[\s\S]*?(\r\n|\r|\n)/g), '');
-			console.log(comments[j]);
+			// console.log(comments[j]);
 			
 			var config = parseJSON(comments[j]);
 			if (config) {
@@ -98,7 +98,7 @@ const initChart = function (Reveal) {
 					mergeRecursive(chartData, config.data);
 				}
 				if (config.options) {
-					console.log(config.options);
+					// console.log(config.options);
 					evalCodeStrings(config.options);
 					mergeRecursive(chartOptions, config.options);
 				}
