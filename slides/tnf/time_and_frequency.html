@@ -1,8 +1,8 @@
-<section class="center">
+<!-- <section class="center">
   <p class="r-fit-text">Zeit und Frequenz</p>
-</section>
+</section> -->
 
-<section data-markdown>
+<!-- <section data-markdown>
   Beispiele:
   - Sinus → Delta
   - Exponentialfunktion → Exponentialfunktion
@@ -12,93 +12,61 @@
   - Dispersion
   - Cochlea
   - Neocortex
-</section>
+</section> -->
 
-<section class="center">
+<!-- <section class="center">
   <p class="r-fit-text">Definitionen und Beispiele</p>
-</section>
+</section> -->
 
 <section>
-  <h3>
-    Spektrale Leistungsdichte: \(\mathcal{P}(x) = |X_{k}|^{2}\)
+  <h3 class="r-stretch">
+    Definitionen und Konventionen
   </h3>
-  <div style="height: 300px">
-    <canvas data-chart="line">
-      <!--
-      {
-        "data": {
-          "labels": "(() => {return x_0_to_n;})()",
-          "datasets":[
-            {
-              "data": "(() => {return sin_32_noisy;})()",
-              "pointRadius": "0"
-            }
-          ]
-        },
-        "options": {
-          "scales": {
-            "x": {
-              "type": "linear",
-              "ticks": {
-                "min": 0,
-                "max": "(() => {return n_default})()",
-                "autoSkip": true,
-                "stepSize": "(() => {return n_default/16})()",
-                "callback": "(() => {return (val) => {return val.toFixed(0)}} )()"
-              }
-            },
-            "y": {
-              "type": "linear",
-              "min": -1,
-              "max": 1,
-              "ticks": {
-                "autoSkip": true,
-                "stepSize": "(() => {return 0.5})()",
-                "callback": "(() => {return (val) => {return val.toFixed(1)}} )()"
-              }
-            }
-          }
-        }
-      }
-      -->
-    </canvas>
-  </div>
+  <div>
+    <table style="width: 100%;">
+      <tr>
+        <td>
+          Signale und Zeiten
+        </td>
+        <td>
+          Dimensionslose Signalwerte $x_{n}$
+          <br>Diskrete Zeit $n \in \{0,...,N-1\}$
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Amplituden und Frequenzen
+        </td>
+        <td>
+          Dimensionslose Amplituden $A_{k}$
+          <br>Diskrete Frequenzen $k \in \{0,...,N-1\}$
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Hintransformation
+        </td>
+        <td>
+          \(X_k = \sum\limits_{n=0}^{N-1} x_{n} e^{-\frac{2\pi i}{N} nk}\)
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Rücktransformation
+        </td>
+        <td>
+          \(x_n = \frac{1}{N}\sum\limits_{k=0}^{N-1} X_{k} e^{\frac{2\pi i}{N} nk}\)
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Delta-Funktionen, Kronecker delta
+        </td>
+        <td>
+        </td>
+      </tr>
+    </table>
 
-  <div style="height: 300px;">
-    <canvas data-chart="line">
-      <!--
-      {
-        "data": {
-          "labels": "(() => {return x_0_to_n;})()",
-          "datasets":[
-            {
-              "data": "(() => {return getPowerSpectrum(sin_32_noisy);})()",
-              "pointRadius": "0"
-            }
-          ]
-        },
-        "options": {
-          "scales": {
-            "x": {
-              "type": "logarithmic",
-              "min": "0.1",
-              "max": "(() => {return n_default})()",
-              "ticks": {
-                "maxTicksLimit": 16,
-                "callback": "(() => {return (val) => {return val}} )()"
-              }
-            },
-            "y": {
-              "type": "logarithmic",
-              "ticks": {
-                "maxTicksLimit": 4,
-                "callback": "(() => {return (val) => {return '10^' + Math.log10(val)}} )()"
-              }
-            }
-          }
-        }
-      }
-      -->
-    </canvas>
+
   </div>
 </section>

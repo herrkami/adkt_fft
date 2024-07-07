@@ -38,34 +38,76 @@
     <div class="slides">
 
       <!-- Intro -->
-      <include src="slides/intro.html"></include>
+      <section>
+        <include src="slides/intro.html"></include>
+        <include src="slides/goals.html"></include>
+      </section>
 
-      <!-- Goals -->
-      <include src="slides/goals.html"></include>
+
 
       <!-- Motivation -->
       <!-- Time and frequency -->
       <section>
+        
+        <section class="center" data-background-color="#ffff00">
+          <h1 class="r-fit-text">Fouriertransformationen</h1>
+        </section>
+        
         <include src="slides/tnf/time_and_frequency.html"></include>
         <include src="slides/tnf/tnf_amplitudes_and_frequencies.html"></include>
+        <include src="slides/tnf/tnf_power_spectrum.html"></include>
         <include src="slides/tnf/tnf_sin_delta.html"></include>
         <include src="slides/tnf/tnf_delta0.html"></include>
         <include src="slides/tnf/tnf_pulse.html"></include>
         <include src="slides/tnf/tnf_gauss.html"></include>
-      </section>
+        <!-- Space and frequency -->
+        <!-- <include src="slides/space_and_frequency.html"></include> -->
 
-      <!-- Space and frequency -->
-      <include src="slides/space_and_frequency.html"></include>
+
 
       <!-- FT in nature and technology -->
-      <include src="slides/ft_in_nature_and_technology.html"></include>
+        <section class="center" data-background-color="#ffff00">
+          <h1 class="r-fit-text">Fouriertransformationen <br>in Natur und Technik</h1>
+        </section>
+
+        <include src="slides/app/ft_in_nature_and_technology.html"></include>
+      
+      </section>
+
+
 
       <!-- Algorithms -->
-      <include src="slides/algorithms.html"></include>
-      <include src="slides/pre_and_postprocessing.html"></include>
+      <section>
+        
+        <section class="center" data-background-color="#ffff00">
+          <h1 class="r-fit-text">Algorithmen</h1>
+        </section>
+        
+        <include src="slides/algorithms/algorithms.html"></include>
+        <include src="slides/algorithms/dft.html"></include>
+        <include src="slides/algorithms/radix.html"></include>
+        <include src="slides/algorithms/chrip-z.html"></include>
+        <include src="slides/algorithms/chrip-z.html"></include>
+        
+        <section class="center">
+          <h1 class="r-fit-text">Beyond FFT</h1>
+        </section>
+        
+        <include src="slides/algorithms/pre_and_postprocessing.html"></include>
+        <include src="slides/algorithms/complex_numbers.html"></include>
+        <include src="slides/algorithms/boundaries.html"></include>
+        <include src="slides/algorithms/sampling.html"></include>
+      
+      </section>
+      
+
 
       <!-- Goodies -->
-      <include src="slides/goodies.html"></include>
+      <section>
+        <include src="slides/goodies/goodies.html"></include>
+      </section>
+
+
 
       <!-- Recap -->
       <include src="slides/recap.html"></include>
@@ -126,9 +168,14 @@
         chart: {
           defaults: {
             color: '#383D3D', // color of labels
+            spanGaps: true,
+
+            // animation: false,
+            
             font: {
               size: 20,
             },
+            
             scale: {
               beginAtZero: true,
               ticks: {
@@ -151,8 +198,8 @@
                 callbacks: {
                   title: function (ctx) {
                     let x = ctx[0].parsed.x;
-                    if ( x != null ) {
-                      if ( ctx[0].chart.scales.x.type === "logarithmic") {
+                    if (x != null) {
+                      if (ctx[0].chart.scales.x.type === "logarithmic") {
                         x = 'f: ' + x.toFixed(0);
                       } else {
                         x = 't: ' + x.toFixed(0);
@@ -162,8 +209,8 @@
                   },
                   label: (ctx) => {
                     let y = ctx.parsed.y;
-                    if ( y != null ) {
-                      if ( ctx.chart.scales.y.type === "logarithmic") {
+                    if (y != null) {
+                      if (ctx.chart.scales.y.type === "logarithmic") {
                         y = 'X: ' + y.toExponential(2).replace(/e\+?/, ' x 10^');
                       } else {
                         y = 'x: ' + y.toFixed(2);

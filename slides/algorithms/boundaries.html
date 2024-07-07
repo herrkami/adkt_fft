@@ -1,7 +1,6 @@
 <section>
     <h3>
-      Gauß-Funktion: \( e^{-\left(\frac{(n - n_{0})}{\sigma_{N}}\right)^{2}} \rightarrow\) 
-      <span class="fragment" data-fragment-index="1">\(e^{-\left(\frac{(k)}{\sigma_{K}}\right)^{2}}\)</span>
+      Sinus
     </h3>
     <div style="height: 300px">
       <canvas data-chart="line">
@@ -11,7 +10,7 @@
             "labels": "(() => {return x_0_to_n;})()",
             "datasets":[
               {
-                "data": "(() => {return gauss;})()",
+                "data": "(() => {return sin_32;})()",
                 "pointRadius": "0"
               }
             ]
@@ -45,7 +44,7 @@
               "labels": "(() => {return x_0_to_n;})()",
               "datasets":[
                 {
-                  "data": "(() => {return getAmplitudes(gauss);})()",
+                  "data": "(() => {return getAmplitudes(sin_32);})()",
                   "pointRadius": "0"
                 }
               ]

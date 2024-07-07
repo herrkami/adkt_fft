@@ -35,7 +35,7 @@ $overlayElementFgColor: 240, 240, 240;
 //   line-height: 1.0em;
 // }
 .reveal .katex {
-  font-size: 110%;
+  font-size: 108%;
 }
 
 .reveal :is(h1, h2, h3, h4, h5, h6, p, blockquote) {
@@ -45,6 +45,14 @@ $overlayElementFgColor: 240, 240, 240;
 .reveal :is(ul, ol, dl) {
   display: block !important;
 }
+
+.reveal :is(ul) {
+  list-style-type: circle !important;
+}
+
+// .reveal table :is(td, th) {
+//   border-bottom: none !important;
+// }
 
 .reveal blockquote {
   width: 100% !important;

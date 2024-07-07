@@ -298,6 +298,7 @@ gulp.task('serve', () => {
     const slidesRoot = root.endsWith('/') ? root : root + '/'
     gulp.watch([
         slidesRoot + '**/*.html',
+        slidesRoot + 'slides/**/**/*.html',
         slidesRoot + '**/*.md',
         `!${slidesRoot}**/node_modules/**`, // ignore node_modules
     ], gulp.series('reload'))
