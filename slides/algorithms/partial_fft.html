@@ -1,3 +1,7 @@
+<section class="center">
+  <h1>Teilspektren</h1>
+</section>
+
 <section>
   <a href="https://de.wikipedia.org/wiki/Goertzel-Algorithmus">
     Goertzel-Algorithmus
@@ -20,4 +24,19 @@
       Ähnliche Algorithmen (Filter-basiert, diskrete Kanäle)
     </li>
   </ol>
+</section>
+
+
+
+<section style="bottom: 0px;">
+  <h1 class="r-stretch"><a href="https://de.wikipedia.org/wiki/Goertzel-Algorithmus">Goertzel-Algorithmus</a></h1>
+
+  
+  <p>Startbedingung:<br> $g_{N+2} = g_{N+1} = 0$</p>
+
+  <p>Iteration:<br> $g_n = x_n + 2 \cdot g_{n+1} \cdot \cos \omega - g_{n+2}$ mit $n = N, N-1, \dotsc, 1$</p>
+  
+  <p>$a = x_0 + g_1 \cdot \cos \omega - g_2$</p>
+  <p>$b = g_1 \cdot \sin \omega\quad$ mit $\quad a + ib = X(\omega)$</p>
+
 </section>
