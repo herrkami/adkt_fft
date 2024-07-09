@@ -2,41 +2,40 @@
   <h1>Teilspektren</h1>
 </section>
 
-<section>
-  <a href="https://de.wikipedia.org/wiki/Goertzel-Algorithmus">
-    Goertzel-Algorithmus
-  </a>
-  Chirp-Z
-  <ol>
-    <li>
-      Definition/Anwendungsgebiet
-    </li>
-    <li>
-      Algorithmus und Implementierung skizzieren
-    </li>
-    <li>
-      Komplexität angeben
-    </li>
-    <li>
-      Anwendungsgebiete
-    </li>
-    <li>
-      Ähnliche Algorithmen (Filter-basiert, diskrete Kanäle)
-    </li>
-  </ol>
+<section style="bottom: 0px;">
+  <h2 class="r-stretch"><a href="https://de.wikipedia.org/wiki/Goertzel-Algorithmus">Goertzel-Algorithmus</a></h2>
+
+  
+  <p>Startbedingung
+    <br> $g_{N+2} = g_{N+1} = 0$</p><br>
+
+  <p>Iteration für $n = N, N-1, \dotsc, 1$
+    <br> $g_n = x_n + 2 \cdot g_{n+1} \cdot \cos \omega - g_{n+2}$</p><br>
+  
+  <p>→ $a = x_0 + g_1 \cdot \cos \omega - g_2$</p>
+  <p>→ $b = g_1 \cdot \sin \omega\quad$</p>
+  <p>→ $X(\omega) = a + ib$</p>
+
 </section>
 
-
-
 <section style="bottom: 0px;">
-  <h1 class="r-stretch"><a href="https://de.wikipedia.org/wiki/Goertzel-Algorithmus">Goertzel-Algorithmus</a></h1>
+  <h2 class="r-stretch">Teilspektren</h2>
 
-  
-  <p>Startbedingung:<br> $g_{N+2} = g_{N+1} = 0$</p>
-
-  <p>Iteration:<br> $g_n = x_n + 2 \cdot g_{n+1} \cdot \cos \omega - g_{n+2}$ mit $n = N, N-1, \dotsc, 1$</p>
-  
-  <p>$a = x_0 + g_1 \cdot \cos \omega - g_2$</p>
-  <p>$b = g_1 \cdot \sin \omega\quad$ mit $\quad a + ib = X(\omega)$</p>
-
+  <div class="multiCol">
+    <div class="col" style="vertical-align: bottom; width: 65%;">
+    </div>
+    <div class="col" style="vertical-align:bottom;">
+      <ul style="list-style-type: circle;">
+        <li>
+          Goertzel-Algorithmus ist ein digitaler Filter (IIR)
+        </li>
+        <li>
+          Filter können verwendet werden spezifische spektrale Komponenten zu extrahieren
+        </li>
+        <li>
+          Der konkrete Filter wird dabei nach der spezifischen Anwendung ausgewählt
+        </li>
+      </ul>
+    </div>
+  </div>
 </section>
