@@ -1,0 +1,176 @@
+<section class="center">
+  <h1>Radix-$2^{N}$</h1>
+</section>
+
+<section>
+  <h2>Radix-$2^{N}$</h2>
+
+  <h4 class="r-stretch">Konzept:<br> Zerlegung der FT in $m$ kürzere FT ($N_{\text{sig}} = m \cdot N_{m}$)</h4>
+  <div class="multiCol" style="width: 100%;">
+    <div class="col" style="vertical-align: bottom; width: 30%;">
+    </div>
+    <div class="col" style="vertical-align:bottom;">
+      <ul>
+        <li>
+          $\mathcal{O}(N^{2}) \rightarrow \mathcal{O}(N \log(N))$
+        </li>
+        <li>
+          Signallänge muss eine $2^{N}$-Potenz sein (\(N_{\text{sig}} = 2^{2^N}\))
+          <ul>
+            <li>
+              Radix-2 → $N_{\text{sig}} = 2, 4, 8, 16, 32, 64, …$
+              <br>
+            </li>
+            <li>
+              Radix-4 → $N_{\text{sig}} = 4, 16, 64, 256, 1024, 4096, …$
+              <br>~25% weniger Multiplikationen als Radix-2
+            </li>
+            <li>
+              Radix-8 → $N_{\text{sig}} = 8, 64, 512, 4096, 32768, …$
+              <br>~40% weniger Multiplikationen als Radix-2
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="r-stretch">Radix-$2$ (Cooley-Tukey)</h2>
+
+  <p style="text-align: center;">
+    \(
+    \begin{matrix}
+    X_k = \sum\limits_{n=0}^{N-1}x_n e^{-\frac{2\pi i}{N} nk} &=& \sum\limits_{m=0}^{N/2-1} x_{2m} e^{-\frac{2\pi i}{N}
+    (2m)k} &+& \sum\limits_{m=0}^{N/2-1} x_{2m+1} e^{-\frac{2\pi i}{N} (2m+1)k} \\
+    &&&&\\
+    &=& \sum\limits_{m=0}^{N/2-1} x_{2m} e^{-\frac{2\pi i}{N/2} mk}x_n &+& e^{-\frac{2\pi i}{N}k} \cdot
+    \sum\limits_{m=0}^{N/2-1} x_{2m+1} e^{-\frac{2\pi i}{N/2} mk} x_n \\
+    &&&&\\
+    &=& E_k &+& e^{-\frac{2\pi i}{N}k} \cdot O_k
+    \end{matrix}
+    \)
+  </p>
+  <p class="fragment">→ Nur für $k = 0, \dots, \frac{N}{2} - 1$</p>
+</section>
+
+<section>
+  <h2>Radix-$2$ (Cooley-Tukey)</h2>
+
+  <h4 class="r-stretch">Für die anderen $k$:</h4>
+  <p style="text-align: center;">
+    \(
+    \begin{matrix}
+    &X_{k+\frac{N}{2}} &=& \sum\limits_{n=0}^{N-1}x_n e^{-\frac{2\pi i}{N} n(k+\frac{N}{2})} = \dots = E_k -
+    e^{-\frac{2\pi i}{N}{k}} O_k\\
+    &&&\\
+    &&&\\
+    \rightarrow&X_k &=& E_k + e^{-\frac{2\pi i}{N}{k}} \cdot O_k \\
+    \rightarrow&X_{k+\frac{N}{2}} &=& E_k - e^{-\frac{2\pi i}{N}{k}} \cdot O_k
+    \end{matrix}
+    \)
+  </p><br><br><br>
+</section>
+
+<section>
+  <h2>Radix-$2$ (Cooley-Tukey)</h2>
+
+  <div class="multiCol" style="height: 700px;">
+    <div class="col" style="vertical-align: top; width: 40%;">
+      <h4>Schmetterlingsgraph</h4><br>
+      <p style="font-size: 80%;">
+        \(
+        \begin{matrix}
+        X_k &=& E_k + e^{-\frac{2\pi i}{N}{k}} \cdot O_k \\
+        X_{k+\frac{N}{2}} &=& E_k - e^{-\frac{2\pi i}{N}{k}} \cdot O_k
+        \end{matrix}
+        \)
+      </p><br><br><br><br>
+    </div>
+    <div class="col" style="vertical-align: top;">
+      <img height="700px" src="../../dist/img/DIT-FFT-butterfly.png" />
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 class="r-stretch">Radix-$2$: Rekursiver Algorithmus</h2>
+
+  <pre><code>
+    X0,...,N-1 ← recursive-radix-2(x, N, s):              DFT of (x0, xs, x2s, ..., x(N-1)s):
+      if N = 1 then
+          X0 ← x0                                   trivial size-1 DFT base case
+      else
+          X0,...,N/2-1 ← recursive-radix-2(x, N/2, 2s)    DFT of (x0, x2s, x4s, ..., x(N-2)s)
+          XN/2,...,N-1 ← recursive-radix-2(x+s, N/2, 2s)  DFT of (xs, xs+2s, xs+4s, ..., x(N-1)s)
+          for k = 0 to N/2-1 do                     combine DFTs of two halves into full DFT:
+              p ← Xk
+              q ← exp(-2πi/N k) Xk+N/2
+              Xk ← p + q 
+              Xk+N/2 ← p - q
+          end for
+      end if
+  </code></pre>
+  <div class="fragment">
+    <p>Probleme der Rekursion:</p>
+    <ul>
+      <li>
+        Rekursive Funktionsaufrufe erfordern jedes Mal Wechsel des Programmfokus
+      </li>
+      <li>
+        Jeweils verbunden mit aufwendigen und schwer optimierbaren Speicherzugriffen
+      </li>
+      <li>
+        Laufzeit und Speicherbedarf können erheblich werden ($>\mathcal{O}(N \log(N))$)
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2 class="r-stretch">Radix-$2$: Iterativer Algorithmus</h2>
+
+  <pre><code>
+    algorithm iterative-radix-2 is
+    input: Array a of n complex values where n is a power of 2.
+    output: Array A the DFT of a.
+ 
+    bit-reverse-copy(a, A)
+    n ← a.length 
+    for s = 1 to log(n) do
+        m ← 2s
+        ωm ← exp(-2πi/m) 
+        for k = 0 to n-1 by m do
+            ω ← 1
+            for j = 0 to m/2 - 1 do
+                t ← ω A[k + j + m/2]
+                u ← A[k + j]
+                A[k + j] ← u + t
+                A[k + j + m/2] ← u - t
+                ω ← ω ωm
+   
+    return A
+  </code></pre>
+</section>
+
+
+<section>
+  <h2 class="r-stretch">Radix-$2$: Zusammenfassung</h2>
+
+  <ul>
+    <li>
+      Populärer und eleganter Algorithmus
+    </li>
+    <li>
+      Sehr performant für Signallängen ($N_{sig} = 2^N$)
+    </li>
+    <li>
+      Für den Rest (insb. Primreste) können $\mathcal{O}(N^2)$-Algorithmen eingesetzt werden oder auch
+    </li>
+    <li>
+      Split-radix-, Primfaktor-, oder Chirp-z-Algorithmen mit $\mathcal{O}(N \log(N))$ 
+    </li>
+  </ul>
+  <p class="fragment">→ Betrachten wir die DFT als Matrix</p>
+</section>

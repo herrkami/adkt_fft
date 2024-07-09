@@ -10,3 +10,63 @@ Rewriting FFT as convolution:
 {\displaystyle p^{m}},[4][5] and today Rader's algorithm is sometimes described as a special case of Winograd's FFT algorithm, also called the multiplicative Fourier transform algorithm (Tolimieri et al., 1997),[6] which applies to an even larger class of sizes. However, for composite sizes such as prime powers, the Cooley–Tukey FFT algorithm is much simpler and more practical to implement, so Rader's algorithm is typically only used for large-prime base cases of Cooley–Tukey's recursive decomposition of the DFT.[3]
 
 -->
+<section>
+  Bluestein, Rader's, Winograd, Bruun's algorithm
+  <ol>
+    <li>
+      Winograd-Algorithmus
+      <ul>
+        <li>
+          Einschränkungen
+          <ul>
+            <li>
+              Signallänge muss sich als Produkt \(N = \prod\limits^{m}_{j=1}N_j\) einer Kombination der Werte \(N_j \in
+              \{2,3,4,5,7,8,9,16\}\) zusammensetzen lassen, wobei die verwendeten \(N_{j}\) <u>teilerfremd</u> sein
+              müssen. Hieraus folgt eine maximale Signallänge von \(N_{\text{max}} = 16 \cdot 9 \cdot 7 \cdot 5 = 5040\)
+            </li>
+          </ul>
+        </li>
+        <li>
+          FFT besteht aus \(m\) DFT mit jeweils entsprechenden Längen \(N_{j}\).
+        </li>
+        <li>
+          \(N\) kann flexibler gewählt werden als bei Radix-Algorithmen und es sind weniger Multiplikationen notwendig
+        </li>
+        <li>
+          Dafür jedoch mehr Additionen und zu Anfang und am Eingang und Ausgang aufwendige Permutation der der Daten
+          (Chinesischer Restsatz)
+        </li>
+        <li>
+          Vielleicht in Spezialfällen nützlich (insb. wenn Multiplikation teuer ist)
+        </li>
+        <li>
+          Mit $\mathcal{O}(N)$ Muliplikationen markiert Winograd das erreichbare Minimum (Zahl der Additionen steigt im Gegenzug)
+        </li>
+      </ul>
+    </li>
+
+    <li>
+      Raders Algorithmus/Primfaktor-FFT
+      <ul>
+        <li>
+          Ähnlich wie Winograd, aber einfacher
+        </li>
+      </ul>
+    </li>
+
+    <li>
+      Chip-z / Bluestein's algorithm
+      <ul>
+        <li>
+          <i>
+            The chirp Z-transform (CZT) is a generalization of the discrete Fourier transform (DFT). While the DFT
+            samples
+            the Z plane at uniformly-spaced points along the unit circle, the chirp Z-transform samples along spiral
+            arcs
+            in the Z-plane, corresponding to straight lines in the S plane.
+          </i>
+        </li>
+      </ul>
+    </li>
+  </ol>
+</section>

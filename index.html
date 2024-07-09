@@ -48,11 +48,10 @@
       <!-- Motivation -->
       <!-- Time and frequency -->
       <section>
-        
         <section class="center" data-background-color="#ffff00">
           <h1 class="r-fit-text">Fouriertransformationen</h1>
         </section>
-        
+
         <include src="slides/tnf/time_and_frequency.html"></include>
         <include src="slides/tnf/tnf_amplitudes_and_frequencies.html"></include>
         <include src="slides/tnf/tnf_power_spectrum.html"></include>
@@ -65,55 +64,76 @@
 
 
 
-      <!-- FT in nature and technology -->
-        <section class="center" data-background-color="#ffff00">
+        <!-- FT in nature and technology -->
+        <!-- <section class="center" data-background-color="#ffff00">
           <h1 class="r-fit-text">Fouriertransformationen <br>in Natur und Technik</h1>
         </section>
 
-        <include src="slides/app/ft_in_nature_and_technology.html"></include>
-      
+        <include src="slides/app/ft_in_nature_and_technology.html"></include> -->
+
       </section>
 
 
 
       <!-- Algorithms -->
       <section>
-        
+
         <section class="center" data-background-color="#ffff00">
           <h1 class="r-fit-text">Algorithmen</h1>
         </section>
-        
+
         <include src="slides/algorithms/algorithms.html"></include>
-        <include src="slides/algorithms/dft.html"></include>
         <include src="slides/algorithms/radix.html"></include>
-        <include src="slides/algorithms/chrip-z.html"></include>
-        <include src="slides/algorithms/chrip-z.html"></include>
-        
-        <section class="center">
+        <include src="slides/algorithms/dft.html"></include>
+        <!-- <include src="slides/algorithms/partial_fft.html"></include> -->
+        <include src="slides/algorithms/overview.html"></include>
+
+        <!-- <include src="slides/algorithms/chrip-z.html"></include> -->
+        <!-- <include src="slides/algorithms/approximations.html"></include> -->
+      </section>
+
+
+
+      <!-- Beyond FFT -->
+      <section>
+        <section class="center" data-background-color="#ffff00">
           <h1 class="r-fit-text">Beyond FFT</h1>
         </section>
-        
+
         <include src="slides/algorithms/pre_and_postprocessing.html"></include>
-        <include src="slides/algorithms/complex_numbers.html"></include>
+        <!-- <include src="slides/algorithms/complex_numbers.html"></include> -->
         <include src="slides/algorithms/boundaries.html"></include>
-        <include src="slides/algorithms/sampling.html"></include>
-      
+        <!-- <include src="slides/algorithms/sampling.html"></include> -->
+
       </section>
-      
+
 
 
       <!-- Goodies -->
-      <section>
+      <!-- <section>
+        <section class="center" data-background-color="#ffff00">
+          <h1 class="r-fit-text">Goodies</h1>
+        </section>
+
         <include src="slides/goodies/goodies.html"></include>
-      </section>
+      </section> -->
 
 
 
       <!-- Recap -->
-      <include src="slides/recap.html"></include>
+      <section>
+        <section class="center" data-background-color="#ffff00">
+          <h1 class="r-fit-text">Wrap up</h1>
+        </section>
+
+        <include src="slides/recap.html"></include>
+      </section>
 
     </div>
   </div>
+
+
+
 
   <script src="dist/reveal.js"></script>
   <script src="plugin/notes/notes.js"></script>
@@ -170,12 +190,12 @@
             color: '#383D3D', // color of labels
             spanGaps: true,
 
-            // animation: false,
-            
+            animation: false,
+
             font: {
               size: 20,
             },
-            
+
             scale: {
               beginAtZero: true,
               ticks: {

@@ -1,308 +1,69 @@
+<section class="center">
+  <h1>FFT-Algorithmen</h1>
+</section>
+
+<section data-markdown>
+  <script type="text/template">
+    ## DFT → FFT
+    ### Motivation 
+    Schnellere Berechnung durch Komplexitätsreduktion
+    
+    |   |    |   |
+    |:---|:---|:---|
+    | DFT |       | FFT |
+    | $\mathcal{O}(N^2)$ | → | $\approx\mathcal{O}(N\log(N))$ |
+    <!-- .element.table: style="margin: none !important; opacity: 0.7" -->
+  </script>
+</section>
+
+<section data-markdown>
+  <script type="text/template">
+    ## DFT → FFT
+    ### Motivation 
+    ### Möglichkeiten
+    Drei typische Ansätze:
+      - FT in mehrere kleinere FT zerlegen:<br>
+        $T(N^2) \rightarrow T(N^2) +T(N^2) + \mathcal{O}(N) \rightarrow \mathcal{O}(N\log{N})$
+      - FT umsortieren: Symmetrien ausnutzen, in andere Rechenoperationen verwandeln
+      - FT nur teilweise berechnen oder nur so exakt berechnen wie nötig
+  </script>
+</section>
+
+<!-- 
+- FFT
+  - Andere Perspektive: DFT-Matrix
+  - Rader's Algorithmus veranschaulichen
+    - Faltungs-FFTs (chirp-z)
+      - Kurze Übersicht
+      - Teilspektren
+      - Goertzel
+      - Übersicht mit Tabelle (inkl. Komplexität)
+        - DFT
+        - Radix, Zerlegung, Split-Radix
+        - Chirp-z
+        - Polynom
+        - Teilspektren
+  - Cheating
+    - Bandpass-Filter & Co.
+    - Bsp: Mozzi and Bugcrack Filter 
+-->
+
+
 <section style="bottom: 0px;">
   <h1 class="r-stretch">FFT-Algorithmen</h1>
   <div class="multiCol">
     <div class="col" style="vertical-align: bottom; width: 65%;">
     </div>
     <div class="col" style="vertical-align:bottom;">
-        <ul style="list-style-type: circle;">
-          <li>
-            DFT: 
-            <br>Definition und Darstellungen
-          </li>
-          <li>Radix-\(2^{N}\)</li>
-          <li>Chirp-Z</li>
-          <li>Teilspektren</li>
-          <li>Näherungen und Tricks</li>
-        </ul>
+      <ul style="list-style-type: circle;">
+        <li>
+          DFT-Matrizen
+        </li>
+        <li>Radix-\(2^{N}\)</li>
+        <li>Chirp-Z</li>
+        <li>Teilspektren</li>
+        <li>Näherungen und Tricks</li>
+      </ul>
     </div>
   </div>
-</section>
-
-<section data-markdown>
-  # Algorithmen
-
-  <!-- 1. Vanilla DFT
-  1. Definition DFT
-    2. Algorithmus und Implementierung skizzieren
-    3. Komplexität angeben
-    2. Cooley-Tuckey/Radix-2
-    1. Definition/Herleitung
-  2. Algorithmus und Implementierung skizzieren
-    3. Komplexität angeben
-    4. Weitere Derivate
-    3. [Goertzel-Algorithmus](https://de.wikipedia.org/wiki/Goertzel-Algorithmus) 
-    1. Definition/Anwendungsgebiet
-  2. Algorithmus und Implementierung skizzieren
-    3. Komplexität angeben
-    4. Anwendungsgebiete
-    5. Ähnliche Algorithmen (Filter-basiert, diskrete Kanäle)
-  4. ALG Übersicht, Vergleich und Referenzen -->
-</section>
-
-
-<section class="center" id="alg-dft">
-  <h1 class="r-fit-text">DFT</h1>
-</section>
-
-<section>
-  <h1 class="r-fit-text">Diskrete Fouriertransformation</h1>
-  \(X_k = \sum\limits_{n=0}^{N-1} x_{n} e^{-\frac{2\pi i}{N} nk}\)
-  <br>
-
-  Darstellung als DFT-Matrix
-  \(
-  W = \frac{1}{\sqrt{N}} \begin{bmatrix}
-  1&1&1&1&\cdots &1 \\
-  1&\omega&\omega^2&\omega^3&\cdots&\omega^{N-1} \\
-  1&\omega^2&\omega^4&\omega^6&\cdots&\omega^{2(N-1)}\\ 1&\omega^3&\omega^6&\omega^9&\cdots&\omega^{3(N-1)}\\
-  \vdots&\vdots&\vdots&\vdots&\ddots&\vdots\\
-  1&\omega^{N-1}&\omega^{2(N-1)}&\omega^{3(N-1)}&\cdots&\omega^{(N-1)(N-1)}
-  \end{bmatrix}
-  \)
-
-</section>
-
-<section>
-  <h1>Cooley-Tuckey</h1> 
-    <ul>
-      <li>
-        Einschränkungen
-        <ul>
-          <li>
-            Signallänge muss Zweierpotenz sein (\(N = 2^p\)), daher auch Radix-2-FFT
-            <br>(N = 2, 4, 8, 16, 32, 64, …)
-          </li>
-        </ul>
-      </li>
-      <li>
-          \(T(N) = \mathcal{O}(N \cdot \log_{2}(N))\)
-      </li>
-      <li>
-        Rekursiver Algorithmus:
-        <a
-          href="https://de.wikipedia.org/wiki/Schnelle_Fourier-Transformation#Implementierung_als_rekursiver_Algorithmus">
-          https://de.wikipedia.org/wiki/Schnelle_Fourier-Transformation#Implementierung_als_rekursiver_Algorithmus
-        </a>
-        
-      </li>
-      <li>
-        Nichtrekursiver Algorithmus:
-        <a
-          href="https://de.wikipedia.org/wiki/Schnelle_Fourier-Transformation#Implementierung_als_nichtrekursiver_Algorithmus">
-          https://de.wikipedia.org/wiki/Schnelle_Fourier-Transformation#Implementierung_als_nichtrekursiver_Algorithmus
-        </a>
-        
-      </li>
-      <li>
-        <a href="https://de.wikipedia.org/wiki/Schmetterlingsgraph">
-          https://de.wikipedia.org/wiki/Schmetterlingsgraph
-        </a>
-        
-      </li>
-    </ul>
-</section>
-
-<section>
-  Vanilla DFT
-<ol>
-  <li>
-    Definition DFT
-  </li>
-<li>
-  Algorithmus und Implementierung skizzieren
-      </li>
-    <li>
-      Komplexität angeben
-    </li>
-  </ol>
-</section>
-
-<section>
-  Cooley-Tuckey/Radix-2/Split-Radix
-    <ol>
-      <li>
-        Definition/Herleitung
-      </li>
-      <li>
-        Algorithmus und Implementierung skizzieren
-      </li>
-      <li>
-        Komplexität angeben
-      </li>
-    <li>
-      Weitere Derivate
-    </li>
-  </ol>
-</section>
-<section>
-  Bluestein, Rader's, Winograd, Bruun's algorithm
-      <ol>
-        <li>
-          Definition/Herleitung
-        </li>
-        <li>
-          Algorithmus und Implementierung skizzieren
-        </li>
-        <li>
-          Komplexität angeben
-        </li>
-        <li>
-          Weitere Derivate
-        </li>
-      </ol>
-</section>
-
-
-
-
-<section>
-    <a href="https://de.wikipedia.org/wiki/Goertzel-Algorithmus">
-      Goertzel-Algorithmus
-    </a>
-    Chirp-Z
-    <ol>
-      <li>
-        Definition/Anwendungsgebiet
-      </li>
-      <li>
-        Algorithmus und Implementierung skizzieren
-      </li>
-      <li>
-        Komplexität angeben
-      </li>
-      <li>
-        Anwendungsgebiete
-      </li>
-      <li>
-        Ähnliche Algorithmen (Filter-basiert, diskrete Kanäle)
-      </li>
-    </ol>
-</section>
-
-<section>
-ALG Übersicht, Vergleich und Referenzen
-<h3>
-  Taxonomie
-</h3>
-<h4>
-  Vollständige Berechnung
-</h4>
-<ul>
-  <li>
-    
-  </li>
-  <li>
-    Radix-
-      \(2^{N}\)
-    -Algorithmen
-    <ul>
-      <li>
-        Einschränkungen:
-        <ul>
-          <li>
-            Signallänge muss eine Potenz einer Zweierpotenz sein (\(N = 2^{2^p}\))
-            <ul>
-              <li>
-                Radix-4
-                <br>→ N = 4, 16, 64, 256, 1024, 4096, …
-                <br>~25% weniger Multiplikationen
-              </li>
-              <li>
-                Radix-8:
-                <br>→ N = 8, 64, 512, 4096, 32768, 262144, …
-                <br>~40% weniger Multiplikationen
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-      <li>
-        Aufwändig zu implementieren
-      </li>
-      <li>
-        Kann sich aber lohnen, wenn die Signallänge wählbar ist (bsp. Framebuffer)
-      </li>
-    </ul>
-  </li>
-
-  <li>
-    Winograd-Algorithmus
-    <ul>
-      <li>
-        Einschränkungen
-        <ul>
-          <li>
-            Signallänge muss sich als Produkt \(N = \prod\limits^{m}_{j=1}N_j\) einer Kombination der Werte \(N_j \in \{2,3,4,5,7,8,9,16\}\) zusammensetzen lassen, wobei die verwendeten \(N_{j}\) <u>teilerfremd</u> sein müssen. Hieraus folgt eine maximale Signallänge von \(N_{\text{max}} = 16 \cdot 9 \cdot 7 \cdot 5 = 5040\)
-          </li>
-        </ul>
-      </li>
-      <li>
-        FFT besteht aus \(m\) DFT mit jeweils entsprechenden Längen \(N_{j}\).
-      </li>
-      <li>
-          \(N\) kann flexibler gewählt werden als bei Radix-Algorithmen und es sind weniger Multiplikationen notwendig
-      </li>
-      <li>
-        Dafür jedoch mehr Additionen und zu Anfang und am Eingang und Ausgang aufwendige Permutation der der Daten (Chinesischer Restsatz)
-      </li>
-      <li>
-        Vielleicht in Spezialfällen nützlich (insb. wenn Multiplikation teuer ist)
-      </li>
-    </ul>
-  </li>
-
-  <li>
-    Raders Algorithmus/Primfaktor-FFT
-    <ul>
-      <li>
-        Ähnlich wie Winograd, aber einfacher
-      </li>
-    </ul>
-  </li>
-
-  <li>
-    Chip-z / Bluestein's algorithm
-    <ul>
-      <li>
-        <i>
-          The chirp Z-transform (CZT) is a generalization of the discrete Fourier transform (DFT). While the DFT samples
-          the Z plane at uniformly-spaced points along the unit circle, the chirp Z-transform samples along spiral arcs
-          in the Z-plane, corresponding to straight lines in the S plane.
-        </i>
-      </li>
-    </ul>
-  </li>
-</ul>
-<h4>
-  Teilweise Berechnung
-</h4>
-<p>
-  Goertzel
-</p>
-<p>
-  Swept z
-</p>
-<h4>
-  Approximative Berechnung
-</h4>
-<p>
-  
-</p>
-<h4>
-  Gar keine Berechnung
-</h4>
-<h3>
-  Literature
-</h3>
-</section>
-
-<section>
-  <ul>
-    <li>
-      <a href="https://link.springer.com/article/10.1007/s00034-019-01136-8">
-        50 Years of FFT Algorithms and Applications
-      </a>
-    </li>
-  </ul>
-
 </section>

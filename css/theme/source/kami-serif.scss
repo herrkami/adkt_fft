@@ -50,9 +50,18 @@ $overlayElementFgColor: 240, 240, 240;
   list-style-type: circle !important;
 }
 
-// .reveal table :is(td, th) {
-//   border-bottom: none !important;
-// }
+.reveal table {
+  margin: inherit !important;
+}
+
+.reveal table :is(td, th) {
+  border-bottom: none !important;
+  vertical-align: top;
+}
+
+.reveal tr.space-under>td {
+  padding-bottom: 1em;
+}
 
 .reveal blockquote {
   width: 100% !important;
@@ -61,6 +70,7 @@ $overlayElementFgColor: 240, 240, 240;
 .reveal pre {
   width: 100% !important;
 }
+
 
 // Multi-column features
 .multiCol {

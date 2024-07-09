@@ -1,10 +1,9 @@
-<section>
-    <h3>
-      Sinus
-    </h3>
-    <div style="height: 300px">
-      <canvas data-chart="line">
-        <!--
+<section style="bottom: 0px;"  data-transition="fade-out">
+  <h1 class="r-stretch">A perfect sine</h1>
+
+  <div style="height: 300px">
+    <canvas data-chart="line">
+      <!--
         {
           "data": {
             "labels": "(() => {return x_0_to_n;})()",
@@ -34,11 +33,11 @@
           }
         }
         -->
-      </canvas>
-    </div>
-    <div style="height: 300px;" class="fragment" data-fragment-index="1">
-      <canvas data-chart="line">
-        <!--
+    </canvas>
+  </div>
+  <div style="height: 300px;">
+    <canvas data-chart="line">
+      <!--
           {
             "data": {
               "labels": "(() => {return x_0_to_n;})()",
@@ -63,6 +62,8 @@
                 },
                 "y": {
                   "type": "logarithmic",
+                  "min": 0.0000000000000001,
+                  "max": 10,
                   "ticks": {
                     "maxTicksLimit": 8,
                     // "callback": "(() => {return (val) => {return '10^' + Math.log10(val)}} )()"
@@ -73,6 +74,368 @@
             }
           }
           -->
-      </canvas>
+    </canvas>
+  </div>
+</section>
+
+<section style="bottom: 0px;" data-transition="fade-in fade-out">
+  <h2>A perfect sine</h2>
+  <p class="r-stretch">What happened?</p>
+
+  <div style="height: 300px">
+    <canvas data-chart="line">
+      <!--
+        {
+          "data": {
+            "labels": "(() => {return x_0_to_n;})()",
+            "datasets":[
+              {
+                "data": "(() => {return sin_32_artifact;})()",
+                "pointRadius": "0"
+              }
+            ]
+          },
+          "options": {
+            "scales": {
+              "x": {
+                "type": "linear",
+                "ticks": {
+                  "min": "0",
+                  "max": "(() => {return n_default})()",
+                  "autoSkip": true,
+                  "stepSize": "(() => {return n_default/16})()",
+                  "callback": "(() => {return (val) => {return val.toFixed(0)}} )()"
+                }
+              },
+              "y": {
+                "display": false
+              }
+            }
+          }
+        }
+        -->
+    </canvas>
+  </div>
+  <div style="height: 300px;">
+    <canvas data-chart="line">
+      <!--
+          {
+            "data": {
+              "labels": "(() => {return x_0_to_n;})()",
+              "datasets":[
+                {
+                  "data": "(() => {return getAmplitudes(sin_32_artifact);})()",
+                  "pointRadius": "0"
+                }
+              ]
+            },
+            "options": {
+              "scales": {
+                "x": {
+                  "type": "logarithmic",
+                  "bounds": "data",
+                  "min": "0.1",
+                  "max": "(() => {return n_default/2})()",
+                  "ticks": {
+                    "maxTicksLimit": 16,
+                    "callback": "(() => {return (val) => {return val}} )()"
+                  }
+                },
+                "y": {
+                  "type": "logarithmic",
+                  "min": 0.0000000000000001,
+                  "max": 10,
+                  "ticks": {
+                    "maxTicksLimit": 8,
+                    // "callback": "(() => {return (val) => {return '10^' + Math.log10(val)}} )()"
+                    "callback": "(() => {return (val) => {return ''}} )()"
+                  }
+                }
+              }
+            }
+          }
+          -->
+    </canvas>
+  </div>
+</section>
+
+<section style="bottom: 0px;" data-transition="fade-in fade-out">
+  <h2>A perfect sine</h2>
+  <p class="r-stretch">Rotate the sine by 512 steps: $n \leftarrow (n + N/2)%N$ <span class="fragment">and zoom in...</span></p>
+
+  <div style="height: 300px">
+    <canvas data-chart="line">
+      <!--
+        {
+          "data": {
+            "labels": "(() => {return x_0_to_n;})()",
+            "datasets":[
+              {
+                "data": "(() => {return sin_32_artifact_rot;})()",
+                "pointRadius": "0"
+              }
+            ]
+          },
+          "options": {
+            "scales": {
+              "x": {
+                "type": "linear",
+                "ticks": {
+                  "min": "0",
+                  "max": "(() => {return n_default})()",
+                  "autoSkip": true,
+                  "stepSize": "(() => {return n_default/16})()",
+                  "callback": "(() => {return (val) => {return val.toFixed(0)}} )()"
+                }
+              },
+              "y": {
+                "display": false
+              }
+            }
+          }
+        }
+        -->
+    </canvas>
+  </div>
+  <div style="height: 300px;">
+    <canvas data-chart="line">
+      <!--
+          {
+            "data": {
+              "labels": "(() => {return x_0_to_n;})()",
+              "datasets":[
+                {
+                  "data": "(() => {return getAmplitudes(sin_32_artifact_rot);})()",
+                  "pointRadius": "0"
+                }
+              ]
+            },
+            "options": {
+              "scales": {
+                "x": {
+                  "type": "logarithmic",
+                  "bounds": "data",
+                  "min": "0.1",
+                  "max": "(() => {return n_default/2})()",
+                  "ticks": {
+                    "maxTicksLimit": 16,
+                    "callback": "(() => {return (val) => {return val}} )()"
+                  }
+                },
+                "y": {
+                  "type": "logarithmic",
+                  "min": 0.0000000000000001,
+                  "max": 10,
+                  "ticks": {
+                    "maxTicksLimit": 8,
+                    // "callback": "(() => {return (val) => {return '10^' + Math.log10(val)}} )()"
+                    "callback": "(() => {return (val) => {return ''}} )()"
+                  }
+                }
+              }
+            }
+          }
+          -->
+    </canvas>
+  </div>
+</section>
+
+<section style="bottom: 0px;" data-transition="fade-in fade-out">
+  <h2>A perfect sine</h2>
+  <p>$\sin(2\pi\cdot 32.00\cdot \frac{n}{N}) \rightarrow \sin(2\pi\cdot 32.01\cdot \frac{n}{N})$</p>
+  <p class="r-stretch">$\rightarrow 32.01$ is no longer an integer fraction of $N = 1024$</p>
+
+  <div style="height: 300px">
+    <canvas data-chart="line">
+      <!--
+        {
+          "data": {
+            "labels": "(() => {return x_0_to_n;})()",
+            "datasets":[
+              {
+                "data": "(() => {return sin_32_artifact_rot;})()",
+                "pointRadius": "0"
+              }
+            ]
+          },
+          "options": {
+            "scales": {
+              "x": {
+                "type": "linear",
+                "min": 448,
+                "max": 576,
+                "ticks": {
+                  "autoSkip": true,
+                  "stepSize": "(() => {return n_default/16})()",
+                  "callback": "(() => {return (val) => {return val.toFixed(0)}} )()"
+                }
+              },
+              "y": {
+                "display": false
+              }
+            }
+          }
+        }
+        -->
+    </canvas>
+  </div>
+  <div style="height: 300px;">
+    <canvas data-chart="line">
+      <!--
+          {
+            "data": {
+              "labels": "(() => {return x_0_to_n;})()",
+              "datasets":[
+                {
+                  "data": "(() => {return getAmplitudes(sin_32_artifact_rot);})()",
+                  "pointRadius": "0"
+                }
+              ]
+            },
+            "options": {
+              "scales": {
+                "x": {
+                  "type": "logarithmic",
+                  "bounds": "data",
+                  "min": "0.1",
+                  "max": "(() => {return n_default/2})()",
+                  "ticks": {
+                    "maxTicksLimit": 16,
+                    "callback": "(() => {return (val) => {return val}} )()"
+                  }
+                },
+                "y": {
+                  "type": "logarithmic",
+                  "min": 0.0000000000000001,
+                  "max": 10,
+                  "ticks": {
+                    "maxTicksLimit": 8,
+                    // "callback": "(() => {return (val) => {return '10^' + Math.log10(val)}} )()"
+                    "callback": "(() => {return (val) => {return ''}} )()"
+                  }
+                }
+              }
+            }
+          }
+          -->
+    </canvas>
+  </div>
+</section>
+
+<section style="bottom: 0px;" data-transition="fade-in fade-out">
+  <h2>Make the sine great(ish) again</h2>
+  <p class="r-stretch">Apply a <a href="https://en.wikipedia.org/wiki/Window_function#Hann_and_Hamming_windows">Hann window function</a> 
+    $w[n] = \sin^{2}(\frac{\pi n}{N})$</p>
+
+  <div style="height: 300px">
+    <canvas data-chart="line">
+      <!--
+        {
+          "data": {
+            "labels": "(() => {return x_0_to_n;})()",
+            "datasets":[
+              {
+                "data": "(() => {return sin_32_artifact.map((v, i) => v*hann[i]);})()",
+                "pointRadius": "0"
+              },
+              {
+                "data": "(() => {return hann;})()",
+                "pointRadius": "0",
+                "borderColor": "yellow"
+              }
+            ]
+          },
+          "options": {
+            "scales": {
+              "x": {
+                "type": "linear",
+                "min": 0,
+                "max": "(() => {return n_default})()",
+                "ticks": {
+                  "autoSkip": true,
+                  "stepSize": "(() => {return n_default/16})()",
+                  "callback": "(() => {return (val) => {return val.toFixed(0)}} )()"
+                }
+              },
+              "y": {
+                "display": false
+              }
+            }
+          }
+        }
+        -->
+    </canvas>
+  </div>
+  <div style="height: 300px;">
+    <canvas data-chart="line">
+      <!--
+          {
+            "data": {
+              "labels": "(() => {return x_0_to_n;})()",
+              "datasets":[
+                {
+                  "data": "(() => {return getAmplitudes(sin_32_artifact.map((v, i) => v*hann[i]));})()",
+                  "pointRadius": "0",
+                  "borderColor": "yellow"
+                },
+                {
+                  "data": "(() => {return getAmplitudes(sin_32_artifact);})()",
+                  "pointRadius": "0"
+                }
+              ]
+            },
+            "options": {
+              "scales": {
+                "x": {
+                  "type": "logarithmic",
+                  "bounds": "data",
+                  "min": "0.1",
+                  "max": "(() => {return n_default/2})()",
+                  "ticks": {
+                    "maxTicksLimit": 16,
+                    "callback": "(() => {return (val) => {return val}} )()"
+                  }
+                },
+                "y": {
+                  "type": "logarithmic",
+                  "min": 0.0000000000000001,
+                  "max": 10,
+                  "ticks": {
+                    "maxTicksLimit": 8,
+                    // "callback": "(() => {return (val) => {return '10^' + Math.log10(val)}} )()"
+                    "callback": "(() => {return (val) => {return ''}} )()"
+                  }
+                }
+              }
+            }
+          }
+          -->
+    </canvas>
+  </div>
+</section>
+
+  
+<section style="bottom: 0px;">
+  <h1 class="r-stretch">Window functions</h1>
+  <div class="multiCol">
+    <div class="col" style="width: 37%;"></div>
+    <div class="col">
+      <ol>
+        <li style="margin-bottom: 0.5em;">
+          Boundaries conditions are (imo) the most important, yet most easily overlooked sources of signal distortions and/or artifacts
+        </li>
+        <li style="margin-bottom: 0.5em;">
+          There is a <a href="https://en.wikipedia.org/wiki/Window_function">zoo of window functions</a> for various use cases, most importantly for reducing
+          <ul>
+            <li>peak distortions or</li>
+            <li>floor distortions</li>
+          </ul>
+          
+        </li>
+        <li style="margin-bottom: 0.5em;">
+          Window functions are relatively cheap to implement<br>($\mathcal{O}(N)$ multiplications)
+        </li>
+      </ol>
     </div>
-  </section>
+  </div>
+</section>

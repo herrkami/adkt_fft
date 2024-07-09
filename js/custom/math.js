@@ -80,8 +80,18 @@ const sin_16 = [...Array(n_default).keys()].map((i) =>
 const sin_32 = [...Array(n_default).keys()].map((i) => 
   Math.sin(i * 32 * 2 * Math.PI / n_default)
 );
+const sin_32_artifact = [...Array(n_default).keys()].map((i) => 
+  Math.sin(i * 32.01 * 2 * Math.PI / n_default)
+);
+const sin_32_artifact_rot = [...Array(n_default).keys()].map((i) => 
+  Math.sin((i + n_default/2)%n_default * 32.01 * 2 * Math.PI / n_default)
+);
 const sin_64 = [...Array(n_default).keys()].map((i) => 
   Math.sin(i * 64 * 2 * Math.PI / n_default)
+);
+
+const hann = [...Array(n_default).keys()].map((i) => 
+  Math.pow(Math.sin(i * Math.PI / n_default), 2)
 );
 
 // Peaks and pulses

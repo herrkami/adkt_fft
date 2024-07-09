@@ -1,0 +1,89 @@
+<section class="center">
+  <h1>DFT-Matrix</h1>
+</section>
+
+<section>
+  <h2>DFT-Matrix</h2>
+  <p class="r-stretch">Matrixformulierung der DFT:</p>
+
+  <p>
+    \(
+    X_k \quad=\quad \sum\limits_{n=0}^{N-1} e^{-\frac{2\pi i}{N} nk} \cdot x_{n}
+    \quad\stackrel{\omega = e^{-\frac{2\pi i}{N}}\\}{=}\quad
+    \sum\limits_{n=0}^{N-1} \omega^{nk} \cdot x_{n}
+    \)
+    <!-- \quad\stackrel{\omega = e^{-\frac{2\pi i}{N}}}{=}\quad -->
+  </p>
+  <!-- <p>
+    $\omega = e^{-\frac{2\pi i}{N}} \quad\rightarrow\quad X_k = \omega^{n \cdot k}\cdot x_{n}$
+  </p><br> -->
+
+  <p class="fragment">
+    \(
+    \rightarrow X = W \cdot x = \begin{bmatrix}
+    1&1&1&1&\cdots &1 \\
+    1&\omega&\omega^2&\omega^3&\cdots&\omega^{N-1} \\
+    1&\omega^2&\omega^4&\omega^6&\cdots&\omega^{2(N-1)}\\ 1&\omega^3&\omega^6&\omega^9&\cdots&\omega^{3(N-1)}\\
+    \vdots&\vdots&\vdots&\vdots&\ddots&\vdots\\
+    1&\omega^{N-1}&\omega^{2(N-1)}&\omega^{3(N-1)}&\cdots&\omega^{(N-1)(N-1)}
+    \end{bmatrix} \cdot
+    \begin{bmatrix}
+    x_0\\
+    x_1\\
+    x_2\\
+    x_3\\
+    \vdots\\
+    x_{N-1}
+    \end{bmatrix}
+    \)
+  </p>
+</section>
+
+<section>
+  <h2 class="r-stretch">DFT-Matrix</h2>
+  <table style="width: 100%;">
+    <tr class="space-under">
+      <th>\(N\)</th>
+      <td style="text-align: center;">2</td>
+      <td style="text-align: center;">4</td>
+      <td style="text-align: center;">8</td>
+    </tr>
+
+    <tr class="space-under">
+      <th>\(\omega\)</th>
+      <td style="text-align: center;">\(e^{\frac{2\pi i}{2}} = -1\)</td>
+      <td style="text-align: center;">\(e^{\frac{2\pi i}{4}} = -i\)</td>
+      <td style="text-align: center;">\(e^{\frac{2\pi i}{8}} = \frac{1}{\sqrt{2}} - \frac{i}{\sqrt{2}}\)</td>
+    </tr>
+
+    <tr>
+      <th>\(W\)</th>
+      <td style="text-align: center; font-size: 26pt;">
+        \(\begin{bmatrix}
+        1 & 1 \\
+        1 & -1
+        \end{bmatrix}\)
+      </td>
+      <td style="text-align: center; font-size: 26pt;">
+        \(\begin{bmatrix}
+        1 & 1 & 1 & 1\\
+        1 & -i & -1 & i\\
+        1 & -1 & 1 & -1\\
+        1 & i & -1 & -i
+        \end{bmatrix}\)
+      </td>
+      <td style="text-align: center; font-size: 26pt;">
+        \(\begin{bmatrix}
+        1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 \\
+        1 & \frac{1-i}{\sqrt2} & -i & \frac{-1-i}{\sqrt2} & -1 & \frac{-1+i}{\sqrt2} & i & \frac{1+i}{\sqrt2} \\
+        1 & -i & -1 & i & 1 & -i & -1 & i \\
+        1 & \frac{-1-i}{\sqrt2} & i & \frac{1-i}{\sqrt2} & -1 & \frac{1+i}{\sqrt2} & -i & \frac{-1+i}{\sqrt2} \\
+        1 & -1 & 1 & -1 & 1 & -1 & 1 & -1 \\
+        1 & \frac{-1+i}{\sqrt2} & -i & \frac{1+i}{\sqrt2} & -1 & \frac{1-i}{\sqrt2} & i & \frac{-1-i}{\sqrt2} \\
+        1 & i & -1 & -i & 1 & i & -1 & -i \\
+        1 & \frac{1+i}{\sqrt2} & i & \frac{-1+i}{\sqrt2} &-1 & \frac{-1-i}{\sqrt2} & -i & \frac{1-i}{\sqrt2}
+        \end{bmatrix}\)
+      </td>
+    </tr>
+  </table>
+</section>
