@@ -43,6 +43,14 @@
   width: 100% !important;
 }
 
+.fragment.blur {
+  filter: none;
+}
+
+.fragment.blur.visible {
+  filter: blur(5px);
+}
+
 .multiCol {
   display: table;
   table-layout: fixed;

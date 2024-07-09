@@ -25,7 +25,7 @@ $headingTextShadow: none;
 $headingTextTransform: none;
 $backgroundColor: #ededed;
 $linkColor: #51483D;
-$linkColorHover: lighten( $linkColor, 20% );
+$linkColorHover: lighten($linkColor, 20%);
 $selectionBackgroundColor: #26351C;
 
 $overlayElementBgColor: 0, 0, 0;
@@ -71,20 +71,34 @@ $overlayElementFgColor: 240, 240, 240;
   width: 100% !important;
 }
 
+.fragment.blur {
+  filter: none;
+}
+
+.fragment.blur.visible {
+  filter: blur(5px);
+}
+
 
 // Multi-column features
 .multiCol {
-    display: table;
-    table-layout: fixed; // don't fudge depending on content
-    width: 100%;
-    text-align: left;
-    .col {
-        display: table-cell;
-        vertical-align: top;
-        width: 50%;
-        padding: 2% 0 2% 3%; // some vertical, and between columns
-        &:first-of-type { padding-left: 0; } // there's nothing before col1
+  display: table;
+  table-layout: fixed; // don't fudge depending on content
+  width: 100%;
+  text-align: left;
+
+  .col {
+    display: table-cell;
+    vertical-align: top;
+    width: 50%;
+    padding: 2% 0 2% 3%; // some vertical, and between columns
+
+    &:first-of-type {
+      padding-left: 0;
     }
+
+    // there's nothing before col1
+  }
 }
 
 // Debug settings

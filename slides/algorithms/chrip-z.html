@@ -10,63 +10,38 @@ Rewriting FFT as convolution:
 {\displaystyle p^{m}},[4][5] and today Rader's algorithm is sometimes described as a special case of Winograd's FFT algorithm, also called the multiplicative Fourier transform algorithm (Tolimieri et al., 1997),[6] which applies to an even larger class of sizes. However, for composite sizes such as prime powers, the Cooley–Tukey FFT algorithm is much simpler and more practical to implement, so Rader's algorithm is typically only used for large-prime base cases of Cooley–Tukey's recursive decomposition of the DFT.[3]
 
 -->
+<section class="center">
+  <h1>Rader's Algorithmus</h1>
+</section>
+
 <section>
-  Bluestein, Rader's, Winograd, Bruun's algorithm
-  <ol>
-    <li>
-      Winograd-Algorithmus
-      <ul>
-        <li>
-          Einschränkungen
-          <ul>
-            <li>
-              Signallänge muss sich als Produkt \(N = \prod\limits^{m}_{j=1}N_j\) einer Kombination der Werte \(N_j \in
-              \{2,3,4,5,7,8,9,16\}\) zusammensetzen lassen, wobei die verwendeten \(N_{j}\) <u>teilerfremd</u> sein
-              müssen. Hieraus folgt eine maximale Signallänge von \(N_{\text{max}} = 16 \cdot 9 \cdot 7 \cdot 5 = 5040\)
-            </li>
-          </ul>
-        </li>
-        <li>
-          FFT besteht aus \(m\) DFT mit jeweils entsprechenden Längen \(N_{j}\).
-        </li>
-        <li>
-          \(N\) kann flexibler gewählt werden als bei Radix-Algorithmen und es sind weniger Multiplikationen notwendig
-        </li>
-        <li>
-          Dafür jedoch mehr Additionen und zu Anfang und am Eingang und Ausgang aufwendige Permutation der der Daten
-          (Chinesischer Restsatz)
-        </li>
-        <li>
-          Vielleicht in Spezialfällen nützlich (insb. wenn Multiplikation teuer ist)
-        </li>
-        <li>
-          Mit $\mathcal{O}(N)$ Muliplikationen markiert Winograd das erreichbare Minimum (Zahl der Additionen steigt im Gegenzug)
-        </li>
-      </ul>
-    </li>
+  <h2><a href="https://en.wikipedia.org/wiki/Rader%27s_FFT_algorithm">Raders Algorithmus</a></h2>
 
-    <li>
-      Raders Algorithmus/Primfaktor-FFT
-      <ul>
-        <li>
-          Ähnlich wie Winograd, aber einfacher
-        </li>
-      </ul>
-    </li>
+  <h4 class="r-stretch">Konzept: FT als Faltung</h4>
+  <div class="multiCol" style="height: 700px;">
+    <div class="col fragment custom blur" style="width: 30%;" data-fragment-index="1">
+      <br><br>
+      <p>$ X_0 = \sum_{n=0}^{N-1} x_n,$</p>
 
-    <li>
-      Chip-z / Bluestein's algorithm
-      <ul>
-        <li>
-          <i>
-            The chirp Z-transform (CZT) is a generalization of the discrete Fourier transform (DFT). While the DFT
-            samples
-            the Z plane at uniformly-spaced points along the unit circle, the chirp Z-transform samples along spiral
-            arcs
-            in the Z-plane, corresponding to straight lines in the S plane.
-          </i>
-        </li>
-      </ul>
-    </li>
-  </ol>
+      <p>$ X_{g^{-p}} = x_0 + \sum_{q=0}^{N-2} x_{g^q} e^{-\frac{2\pi i}{N} g^{-(p-q)} }$</p>
+
+      <p>$ p = 0,\dots,N-2$</p>
+    </div>
+
+    <div class="col fragment fade-in" style="vertical-align: top;" data-fragment-index="1">
+      <img height="600px" src="../../dist/img/1280px-FFT_visual_Rader_11.png" />
+    </div>
+  </div>
+</section>
+
+<section data-markdown>
+  <script type="text/template">
+    ## Raders Algorithmus <!-- .element class="r-stretch" -->
+    - Kann angewendet werden auf Signale deren Länge eine Primzahl ist
+    - $\mathcal{O}(N)$ Additionen + $\mathcal{O}(N\log(N))$ für die Faltung
+    - Es gibt viele weitere Algorithmen, die sich Umsortierung der Indizes andere Transformationen zu Nutze machen, z. B.
+      - Bluesteins Algorithmus
+      - Winograd Algorithmus
+      - Bruuns Algorithmus
+  </script>
 </section>
