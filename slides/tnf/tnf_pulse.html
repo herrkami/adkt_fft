@@ -1,7 +1,7 @@
 <section>
     <h3>
-      Deltaimpuls: \(\delta(n - n_{0}) \rightarrow\) 
-      <span class="fragment" data-fragment-index="1">\(e^{2\pi i\frac{n_{0}}{N}k}\)</span>
+      Deltaimpuls: \( (|n - n_{0}| < n_{\delta}) \, ? \, 1 : 0 \rightarrow\) 
+      <span class="fragment" data-fragment-index="1">\(2 \delta \cdot \text{sinc}(2\pi i\frac{n_{\delta}}{N}k)\)</span>
     </h3>
     <div style="height: 300px">
       <canvas data-chart="line">
@@ -45,7 +45,7 @@
               "labels": "(() => {return x_0_to_n;})()",
               "datasets":[
                 {
-                  "data": "(() => {return getAmplitudes(pulse_noisy);})()",
+                  "data": "(() => {return getPowerSpectrum(pulse_noisy);})()",
                   "pointRadius": "0"
                 }
               ]

@@ -23,47 +23,8 @@
     ### Möglichkeiten
     Drei typische Ansätze:
       - FT in mehrere kleinere FT zerlegen:<br>
-        $T(N^2) \rightarrow T(N^2) +T(N^2) + \mathcal{O}(N) \rightarrow \mathcal{O}(N\log{N})$
+        $T(N^2) \rightarrow T(N^{2}/2) +T(N^{2}/2) + \mathcal{O}(N) \rightarrow \mathcal{O}(N\log{N})$
       - FT umsortieren: Symmetrien ausnutzen, in andere Rechenoperationen verwandeln
       - FT nur teilweise berechnen oder nur so exakt berechnen wie nötig
   </script>
-</section>
-
-<!-- 
-- FFT
-  - Andere Perspektive: DFT-Matrix
-  - Rader's Algorithmus veranschaulichen
-    - Faltungs-FFTs (chirp-z)
-      - Kurze Übersicht
-      - Teilspektren
-      - Goertzel
-      - Übersicht mit Tabelle (inkl. Komplexität)
-        - DFT
-        - Radix, Zerlegung, Split-Radix
-        - Chirp-z
-        - Polynom
-        - Teilspektren
-  - Cheating
-    - Bandpass-Filter & Co.
-    - Bsp: Mozzi and Bugcrack Filter 
--->
-
-
-<section style="bottom: 0px;">
-  <h1 class="r-stretch">FFT-Algorithmen</h1>
-  <div class="multiCol">
-    <div class="col" style="vertical-align: bottom; width: 65%;">
-    </div>
-    <div class="col" style="vertical-align:bottom;">
-      <ul style="list-style-type: circle;">
-        <li>
-          DFT-Matrizen
-        </li>
-        <li>Radix-\(2^{N}\)</li>
-        <li>Chirp-Z</li>
-        <li>Teilspektren</li>
-        <li>Näherungen und Tricks</li>
-      </ul>
-    </div>
-  </div>
 </section>
